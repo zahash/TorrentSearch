@@ -148,24 +148,24 @@ def scrape_results(url, driver):
     return list(items)
 
 
-def main():
-    query_string = "devil may cry"
-
-    chrome_options = Options()
-    chrome_options.add_argument("--headless")
-
-    driver = webdriver.Chrome("chromedriver", options=chrome_options)
-
+def search(query_string, driver):
     proxy_site_urls = get_proxy_site_urls()
     link = proxy_site_urls[0]
 
     items = scrape_results(link.get_search_query_url(query_string), driver)
     items = sorted(items, key=lambda x: x.seeders, reverse=True)
 
-    for i in range(10):
-        print(items[i])
-        print("\n\n")
+    return items
 
 
 if __name__ == "__main__":
-    main()
+
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")
+
+    driver = webdriver.Chrome("chromedriver", options=chrome_options)
+
+    items = search("devil may cry 5", driver)
+    for i in range(10):
+        print(items[i])
+        print("\n\n")

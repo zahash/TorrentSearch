@@ -1,7 +1,5 @@
 import requests
 from bs4 import BeautifulSoup
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
 
 
 class Link:
@@ -43,7 +41,17 @@ class Item:
         self.leechers = leechers
 
     def __repr__(self):
-        return "Item(item_type={}, item_title={}, upload_date={}, magnet_link={}, item_size={}, seeders={}, leechers={})".format(
+        return """\
+Item(
+    item_type={}, 
+    item_title={}, 
+    upload_date={}, 
+    magnet_link={}, 
+    item_size={}, 
+    seeders={}, 
+    leechers={}
+)\
+        """.format(
             self.item_type,
             self.item_title,
             self.upload_date,
@@ -156,16 +164,3 @@ def search(query_string, driver):
     items = sorted(items, key=lambda x: x.seeders, reverse=True)
 
     return items
-
-
-if __name__ == "__main__":
-
-    chrome_options = Options()
-    chrome_options.add_argument("--headless")
-
-    driver = webdriver.Chrome("chromedriver", options=chrome_options)
-
-    items = search("devil may cry 5", driver)
-    for i in range(10):
-        print(items[i])
-        print("\n\n")

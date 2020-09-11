@@ -1,0 +1,40 @@
+{% extends "layout.html" %} {% block body_content %}
+
+<!-- <form action="/" method="POST">
+  <input type="text" name="query" id="query" />
+  <input type="submit" />
+</form> -->
+
+<form action="/" method="POST" class="my-5">
+  <div class="row">
+    <div class="col-md-11">
+      <input
+        type="text"
+        class="form-control"
+        name="query"
+        id="query"
+        placeholder="Search Query"
+      />
+    </div>
+
+    <div class="col-md-1">
+      <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+  </div>
+</form>
+
+{% for item in items %}
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">{{item.item_title}}</h5>
+    <h6 class="card-subtitle mb-2 text-muted">{{item.item_type}}</h6>
+    <h6 class="card-subtitle mb-2 text-muted">{{item.upload_date}}</h6>
+
+    <h5 class="card-title">{{item.item_size}}</h5>
+    <h6 class="card-subtitle mb-2 text-muted">
+      {{item.seeders}} : {{item.leechers}}
+    </h6>
+    <a href="{{item.magnet_link}}" class="card-link">magnet</a>
+  </div>
+</div>
+{% endfor %} {% endblock body_content %}

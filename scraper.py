@@ -35,7 +35,7 @@ class Item:
         self.item_type = item_type
         self.item_title = item_title
         self.upload_date = upload_date
-        self.magent_link = magnet_link
+        self.magnet_link = magnet_link
         self.item_size = item_size
         self.seeders = seeders
         self.leechers = leechers
@@ -55,17 +55,17 @@ Item(
             self.item_type,
             self.item_title,
             self.upload_date,
-            self.magent_link,
+            self.magnet_link,
             self.item_size,
             self.seeders,
             self.leechers,
         )
 
     def __eq__(self, other):
-        return self.magent_link == other.magent_link
+        return self.magnet_link == other.magnet_link
 
     def __hash__(self):
-        return self.magent_link.__hash__()
+        return self.magnet_link.__hash__()
 
 
 def get_proxy_site_urls():
@@ -161,6 +161,6 @@ def search(query_string, driver):
     link = proxy_site_urls[0]
 
     items = scrape_results(link.get_search_query_url(query_string), driver)
-    items = sorted(items, key=lambda x: x.seeders, reverse=True)
+    items = sorted(items, key=lambda x: int(x.seeders), reverse=True)
 
     return items
